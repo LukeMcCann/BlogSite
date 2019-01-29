@@ -15,14 +15,4 @@ class ProfileController extends Controller
     {
         return view('pages.profiles.profile');
     }
-
-    /**
-     * Show the category page.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function category()
-    {
-        return view('pages.categories.category');
-    }
 }
