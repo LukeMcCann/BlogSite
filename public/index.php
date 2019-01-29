@@ -7,6 +7,10 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+ini_set("display_errors", 1);
+
 define('LARAVEL_START', microtime(true));
 
 /*
@@ -58,3 +62,5 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+echo 'Version: ' . substr(phpversion(), 0, 6);
