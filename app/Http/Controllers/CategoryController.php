@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Category;
 class CategoryController extends Controller
 {
     /**
@@ -11,6 +11,15 @@ class CategoryController extends Controller
      */
     public function newCategory(Request $request)
     {
-        return $request->input('category');
+        $this->validate($request, [
+            'category' => 'required'
+        ]);
+
+        // return 'validation passed';
+
+        $category = new Category;
+        $category->category = $request->input('category');
+        $category->save();
+        return redirect('/category')->with('response', 'Successfully Created.');
     }
 }
