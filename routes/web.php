@@ -20,5 +20,6 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/profile', 'ProfileController@profile')->name('profile');
 Route::get('/post', 'PostController@post')->name('post');
 Route::get('/category', 'PostController@category')->name('category');
+Route::post('/newCategory', 'CategoryController@newCategory');
 
 Auth::routes();
