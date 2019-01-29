@@ -13,6 +13,6 @@ class ProfileController extends Controller
      */
     public function profile()
     {
-        return view('pages.profile');
+        return view('pages.profiles.profile');
     }
 }
