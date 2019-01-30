@@ -7,7 +7,7 @@
                     <div class="card-header">New Post</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ url('/newPost') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -42,23 +42,32 @@
                                 <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Category:') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="categories" type="categories" class="form-control{{ $errors->has('categories') ? ' is-invalid' : '' }}" name="categories" required>
+                                    <select id="categories" type="select" class="form-control{{ $errors->has('categories') ? ' is-invalid' : '' }}" name="categories" required>
                                         <option value="">
+                                            Select
+                                        </option>
+                                        <option value="Aerospace">
                                             Aerospace
                                         </option>
-                                        <option value="">
+                                        <option value="Artificial Intelligence">
+                                            Artificial Intelligence
+                                        </option>
+                                        <option value="Astronomy">
                                             Astronomy
                                         </option>
-                                        <option value="">
+                                        <option value="Computer Science">
                                             Computer Science
                                         </option>
-                                        <option value="">
-                                            Mechanical Engineering
-                                        </option>
-                                        <option value="">
+                                        <option value="Electrical Engineering">
                                             Electrical Engineering
                                         </option>
-                                        <option value="">
+                                        <option value="Mechanical Engineering">
+                                            Mechanical Engineering
+                                        </option>
+                                        <option value="Physics">
+                                            Physics
+                                        </option>
+                                        <option value="Software Engineering">
                                             Software Engineering
                                         </option>
                                     </select>
@@ -87,8 +96,8 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary btn-lg">
-                                        {{ __('Post') }}
+                                    <button type="submit" class="btn btn-block btn-primary btn-lg">
+                                        {{ __('Publish') }}
                                     </button>
                                 </div>
                             </div>

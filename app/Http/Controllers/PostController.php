@@ -25,4 +25,14 @@ class PostController extends Controller
     {
         return view('pages.categories.category');
     }
+
+    /**
+     * Create a new post and save to database.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function newPost(Request $request)
+    {
+        return $request->input('title');
+    }
 }

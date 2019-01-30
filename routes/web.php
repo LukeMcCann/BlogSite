@@ -22,5 +22,6 @@ Route::get('/post', 'PostController@post')->name('post');
 Route::get('/category', 'PostController@category')->name('category');
 Route::post('/newCategory', 'CategoryController@newCategory');
 Route::post('/newProfile', 'ProfileController@newProfile');
+Route::post('/newPost', 'PostController@newPost');
 
 Auth::routes();
