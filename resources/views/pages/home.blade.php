@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="col-md-4">
+                        <div class="col-md-8">
+                            <img src="" alt="" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

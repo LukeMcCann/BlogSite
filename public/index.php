@@ -63,4 +63,4 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-echo 'Version: ' . substr(phpversion(), 0, 6);
+// echo 'Version: ' . substr(phpversion(), 0, 6);

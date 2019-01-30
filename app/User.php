@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function getId()
+    {
+        return $this->id;
+    }
     /**
      * The attributes that are mass assignable.
      *
