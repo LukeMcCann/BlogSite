@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Profile;
 use App\User;
+use App\Post;
 use Auth;
 
 
@@ -39,7 +40,8 @@ class HomeController extends Controller
          ->where(['profiles.user_id' => $user_id])
          ->first();
 
-         return view('pages.home', ['profile' => $profile]);
+         $posts = Post::all();
+         return view('pages.home', ['profile' => $profile, 'posts' => $posts]);
      }
 
     /**
