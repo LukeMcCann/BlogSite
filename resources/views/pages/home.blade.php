@@ -2,7 +2,10 @@
 <style type="text/css">
     .avatar {
         border-radius: 100%;
-        max-width: 100px;
+        max-width: 150px;
+    }
+    p {
+
     }
 </style>
 @section('content')
@@ -17,7 +20,12 @@
                 @endforeach
             @endif
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                @if(!empty($profile))
+                    <div class="card-header">{{$profile->username . "'s Dashboard"}}</div>
+                @else
+                    <div class="card-header">Dashboard</div>
+                @endif
+
 
                 <div class="card-body">
                     @if (session('status'))
@@ -28,7 +36,19 @@
 
                     <div class="col-md-4">
                         <div class="col-md-8">
-                            <img src="{{$profile->profile_img}}" class="avatar" alt="" />
+                            @if(!empty($profile))
+                                <img src="{{$profile->profile_img}}" class="avatar" alt="avatar_image" />
+                                <p class="lead">
+                                    {{$profile->username}}
+                                </p>
+                                <p>
+                                    {{$profile->title}}
+                                </p>
+                            @else
+                                <img src="{{url('images/avatar.jpg')}}" class="avatar" alt="avatar_image" />
+                                <p></p>
+                                <p></p>
+                            @endif
                         </div>
                     </div>
                 </div>
