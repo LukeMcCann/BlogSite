@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
+
+use Auth;
+use App\Category;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +19,8 @@ class PostController extends Controller
      */
     public function post()
     {
-        return view('pages.posts.post');
+        $categories = Category::all();
+        return view('pages.posts.post', ['categories' => $categories]);
     }
 
     /**
@@ -33,6 +40,41 @@ class PostController extends Controller
      */
     public function newPost(Request $request)
     {
-        return $request->input('title');
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'categories' => 'required',
+            'post_img' => 'required',
+        ]);
+
+        $posts = new Post;
+
+        if(Auth::check())
+        {
+            $posts->user_id = Auth::user()->getId();
+        }
+
+        $posts->post_title = $request->input('title');
+        $posts->post_content = $request->input('content');
+        $posts->category_id = $request->input('categories');
+
+        // check file is of type file
+        if(Input::hasFile('post_img'))
+        {
+            // file is type file
+            $file = Input::file('post_img');
+            // add file to public img folder
+            $file->move(public_path() . '/posts',
+            $file->getClientOriginalName());
+            // append to end of URL
+            $url = URL::to("/") . '/posts' . '/' .
+            $file->getClientOriginalName();
+
+        }
+
+        $posts->post_img = $url;
+        $posts->save();
+
+        return redirect('/home')->with('response', 'Post Published!');
     }
 }

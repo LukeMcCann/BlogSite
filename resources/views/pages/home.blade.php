@@ -2,10 +2,7 @@
 <style type="text/css">
     .avatar {
         border-radius: 100%;
-        max-width: 150px;
-    }
-    p {
-
+        max-width: 100px;
     }
 </style>
 @section('content')
@@ -18,6 +15,11 @@
                         {{$error}}
                     </div>
                 @endforeach
+            @endif
+            @if(session('response'))
+                <div class="alert alert-success">
+                    {{session('response')}}
+                </div>
             @endif
             <div class="card">
                 @if(!empty($profile))

@@ -51,7 +51,8 @@ class ProfileController extends Controller
             $file->move(public_path() . '/uploads',
             $file->getClientOriginalName());
             // append to end of URL
-            $url = URL::to('/') . '/uploads' . '/' . $file->getClientOriginalName();
+            $url = URL::to("/") . '/uploads' . '/' .
+            $file->getClientOriginalName();
 
         }
 

@@ -7,7 +7,7 @@
                     <div class="card-header">New Post</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ url('/newPost') }}">
+                        <form method="POST" action="{{ url('/newPost') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -41,37 +41,19 @@
                             <div class="form-group row">
                                 <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Category:') }}</label>
 
-                                <div class="col-md-6">
-                                    <select id="categories" type="select" class="form-control{{ $errors->has('categories') ? ' is-invalid' : '' }}" name="categories" required>
+                                <div class="col-md-8">
+                                    <select id="categories" class="form-control{{ $errors->has('categories') ? ' is-invalid' : '' }}" name="categories" required>
                                         <option value="">
                                             Select
                                         </option>
-                                        <option value="Aerospace">
-                                            Aerospace
-                                        </option>
-                                        <option value="Artificial Intelligence">
-                                            Artificial Intelligence
-                                        </option>
-                                        <option value="Astronomy">
-                                            Astronomy
-                                        </option>
-                                        <option value="Computer Science">
-                                            Computer Science
-                                        </option>
-                                        <option value="Electrical Engineering">
-                                            Electrical Engineering
-                                        </option>
-                                        <option value="Mechanical Engineering">
-                                            Mechanical Engineering
-                                        </option>
-                                        <option value="Physics">
-                                            Physics
-                                        </option>
-                                        <option value="Software Engineering">
-                                            Software Engineering
-                                        </option>
+                                        @if(count($categories) > 0)
+                                            @foreach($categories->all() as $category)
+                                                <option value="{{$category->id}}">
+                                                    {{$category->category}}
+                                                </option>
+                                            @endforeach
+                                        @endif
                                     </select>
-
                                     @if ($errors->has('categories'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('categories') }}</strong>
@@ -93,6 +75,7 @@
                                     @endif
                                 </div>
                             </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
