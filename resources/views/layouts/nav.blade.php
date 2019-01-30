@@ -14,7 +14,7 @@
                     <a class="nav-link" href="{{url('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('profile')}}">Profile</a>
+                    <a class="nav-link" href="{{url('profile')}}">Create-Profile</a>
                 </li>
             </ul>
 
@@ -39,7 +39,7 @@
 
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{url('/profile')}}">Profile</a>
+                            <a class="dropdown-item" href="{{url('/profile')}}">Create-Profile</a>
                             <a class="dropdown-item" href="{{url('/category')}}">Category</a>
                             <a class="dropdown-item" href="{{url('/post')}}">New-Post</a>
 
