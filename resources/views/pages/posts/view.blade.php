@@ -33,10 +33,10 @@
                             <ul class="nav nav-pills">
                                 <li role="presentation">
                                         {{-- <a style="color: blue;" role="button" class=" btn btn-light fa fa-eye"> view</a> --}}
-                                        <a href='{{ url("/like/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fas fa-heart"> Like</a>
+                                        <a href='{{ url("/like/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fas fa-heart"> Like ({{$likeCounter}})</a>
                                 </li>
                                 <li role="presentation">
-                                        <a href='{{ url("/dislike/{$post->id}") }}'style="color: white;" role="button" class=" btn btn-dark fas fa-thumbs-down"> Dislike</a>
+                                        <a href='{{ url("/dislike/{$post->id}") }}'style="color: white;" role="button" class=" btn btn-dark fas fa-thumbs-down"> Dislike ({{$dislikeCounter}})</a>
                                 </li>
                                 <li role="presentation">
                                         <a href='{{ url("/comment/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fas fa-comment-dots"> Comment</a>

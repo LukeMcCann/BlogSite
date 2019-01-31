@@ -11,7 +11,7 @@ use Auth;
 use App\Category;
 use App\Post;
 use App\Like;
-
+use App\Dislike;
 class PostController extends Controller
 {
     /**
@@ -108,10 +108,74 @@ class PostController extends Controller
     public function view($post_id)
     {
         $posts = Post::where('id', '=', $post_id)->get();
-        $likePost = Post::find($post_id);
-        $likeCounter = Like::where(['post_id' => $likePost->id])->get();
+        $likePost = Post::findOrFail($post_id);
+        $likeCounter = Like::where(['post_id' => $likePost->id])->count();
+        $dislikeCounter = Dislike::where(['post_id' => $likePost->id])->count();
         $categories = Category::all();
-        return view('pages.posts.view', ['posts' => $posts, 'categories' => $categories]);
+        return view('pages.posts.view', [
+            'posts' => $posts,
+            'categories' => $categories,
+            'likeCounter' => $likeCounter,
+            'dislikeCounter' => $dislikeCounter
+        ]);
+    }
+
+    /**
+     * Add likes to a post.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function like($id)
+    {
+        $user = Auth::user()->getid();
+        $liking_user = Like::where([
+            'user_id' => $user,
+            'post_id' => $id
+        ])
+        ->first();
+
+        if(empty($liking_user->user_id))
+        {
+            $user_id = Auth::user()->id;
+            $post_id = $id;
+            $email = Auth::user()->id;
+            $like = new Like;
+            $like->user_id = $user_id;
+            $like->email = $email;
+            $like->post_id = $post_id;
+            $like->save();
+            return redirect('/view' . '/' . $id);
+        }
+        return redirect('/view' . '/' . $id);
+    }
+
+    /**
+     * Add dislikes to a post.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function dislike($id)
+    {
+        $user = Auth::user()->getid();
+        $disliking_user = Dislike::where([
+            'user_id' => $user,
+            'post_id' => $id
+        ])
+        ->first();
+
+        if(empty($disliking_user->user_id))
+        {
+            $user_id = Auth::user()->id;
+            $post_id = $id;
+            $email = Auth::user()->id;
+            $dislike = new Dislike;
+            $dislike ->user_id = $user_id;
+            $dislike ->email = $email;
+            $dislike ->post_id = $post_id;
+            $dislike ->save();
+            return redirect('/view' . '/' . $id);
+        }
+        return redirect('/view' . '/' . $id);
     }
 
     /**
