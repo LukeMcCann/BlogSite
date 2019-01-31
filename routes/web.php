@@ -17,6 +17,7 @@
 
 Route::post('/comment/{id}', 'PostController@comment');
 Route::get('/like/{id}', 'PostController@like');
+Route::post('/search', 'PostController@search');
 Route::get('/dislike/{id}', 'PostController@dislike');
 Route::get('/category/{id}', 'PostController@categoryChange');
 Route::get('/index', 'HomeController@index')->name('index');

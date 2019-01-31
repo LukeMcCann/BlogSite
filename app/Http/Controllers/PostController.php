@@ -287,4 +287,10 @@ class PostController extends Controller
         Post::where('id', $post_id)->delete();
         return redirect('/home')->with('response', 'Post Deleted!');
     }
+
+    public function search(Request $request)
+    {
+
+        return $request->input('search'):
+    }
 }

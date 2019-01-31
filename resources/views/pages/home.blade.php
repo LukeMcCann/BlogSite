@@ -34,11 +34,13 @@
                     </div>
                 @endforeach
             @endif
+
             @if(session('response'))
                 <div class="alert alert-success">
                     {{session('response')}}
                 </div>
             @endif
+
             <div class="card">
                 @if(!empty($profile))
                     <div class="card-header text-center bg-dark text-white">{{$profile->username . "'s Dashboard"}}</div>
@@ -56,6 +58,7 @@
                     <div class="row container-fluid">
                         {{-- <div class="col-md-7"> --}}
                         <div class="col-md-4 col-centered">
+
                             @if(!empty($profile))
                                 <img src="{{$profile->profile_img}}" class="avatar" alt="avatar_image" />
                                 <p class="lead">
