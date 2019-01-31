@@ -91,13 +91,73 @@ class PostController extends Controller
     }
 
     /**
-     * Edit a post.
+     * Show edit view for post.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function edit($id)
+    public function edit($post_id)
     {
-        return $id;
+        $categories = Category::all();
+        $posts = Post::find($post_id);
+        $category = Category::find($posts->category_id);
+        return view('pages.posts.edit', [
+            'categories' => $categories,
+            'posts' => $posts,
+            'category' => $category
+        ]);
+    }
+
+    /**
+     * Update database with new post data.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function editPost(Request $request, $post_id)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+            'categories' => 'required',
+            'post_img' => 'required',
+        ]);
+
+        $posts = new Post;
+
+        if(Auth::check())
+        {
+            $posts->user_id = Auth::user()->getId();
+        }
+
+        $posts->post_title = $request->input('title');
+        $posts->post_content = $request->input('content');
+        $posts->category_id = $request->input('categories');
+
+        // check file is of type file
+        if(Input::hasFile('post_img'))
+        {
+            // file is type file
+            $file = Input::file('post_img');
+            // add file to public img folder
+            $file->move(public_path() . '/posts',
+            $file->getClientOriginalName());
+            // append to end of URL
+            $url = URL::to("/") . '/posts' . '/' .
+            $file->getClientOriginalName();
+
+        }
+
+        $posts->post_img = $url;
+        $data = array(
+            'post_title' => $posts->post_title,
+            'user_id' => $posts->user_id,
+            'post_content' => $posts->post_content,
+            'category_id' => $posts->category_id,
+            'post_img' => $posts->post_img,
+
+        );
+        Post::where('id', $post_id)->update($data);
+        $posts->update();
+        return redirect('/home')->with('response', 'Update Successful!');
     }
 
     /**
