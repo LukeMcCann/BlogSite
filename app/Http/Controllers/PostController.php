@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 
 use Auth;
+use App\Profile;
 use App\Category;
 use App\Comment;
 use App\Post;
@@ -290,7 +291,17 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
+        if(Auth::check())
+        {
+            $user_id = Auth::user()->getId();
+        }
 
-        return $request->input('search'):
+        $profile = Profile::find($user_id);
+        $searchphrase = $request->input('search');
+        $posts = Post::where('post_title', 'LIKE', '%' .$searchphrase. '%')->get();
+        return view('pages.posts.searched', [
+            'profile' => $profile,
+            'posts' => $posts
+        ]);
     }
 }

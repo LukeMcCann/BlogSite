@@ -57,11 +57,8 @@
 
 
             <div class="card">
-                @if(!empty($profile))
-                    <div class="card-header text-center bg-dark text-white">{{$profile->username . "'s Dashboard"}}</div>
-                @else
-                    <div class="card-header">Dashboard</div>
-                @endif
+                <div class="card-header bg-dark text-center text-white">Results</div>
+
 
                 <div class="card-body text-center bg-dark text-white">
                     @if (session('status'))
@@ -72,22 +69,6 @@
 
                     <div class="row container-fluid">
                         {{-- <div class="col-md-7"> --}}
-                        <div class="col-md-4 col-centered">
-
-                            @if(!empty($profile))
-                                <img src="{{$profile->profile_img}}" class="avatar" alt="avatar_image" />
-                                <p class="lead">
-                                    {{$profile->username}}
-                                </p>
-                                <p>
-                                    {{$profile->title}}
-                                </p>
-                            @else
-                                <img src="{{url('images/avatar.jpg')}}" class="avatar" alt="avatar_image" />
-                                <p></p>
-                                <p></p>
-                            @endif
-                        </div>
                         <div class="col-md-8 col-centered">
                             @if(count($posts) > 0)
                                 @foreach($posts->all() as $post)
@@ -121,8 +102,6 @@
                                     You have no posts!
                                 </p>
                           @endif
-
-                          {{$posts->links()}}
                         </div>
                     </div>
                 </div>
