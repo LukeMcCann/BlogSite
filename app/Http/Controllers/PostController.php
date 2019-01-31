@@ -161,12 +161,13 @@ class PostController extends Controller
     }
 
     /**
-     * Edit a post.
+     * Delete a post.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function delete($id)
+    public function delete($post_id)
     {
-        return $id;
+        Post::where('id', $post_id)->delete();
+        return redirect('/home')->with('response', 'Post Deleted!');
     }
 }

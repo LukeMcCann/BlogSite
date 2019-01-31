@@ -100,7 +100,7 @@
                                 @endforeach
                             @else
                                 <p>
-                                    Post Unavailable!
+                                    You have no posts!
                                 </p>
                           @endif
                         </div>
