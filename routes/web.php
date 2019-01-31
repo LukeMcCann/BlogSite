@@ -15,6 +15,7 @@
 //     return view('pages.index');
 // });
 
+Route::post('/comment/{id}', 'PostController@comment');
 Route::get('/like/{id}', 'PostController@like');
 Route::get('/dislike/{id}', 'PostController@dislike');
 Route::get('/category/{id}', 'PostController@categoryChange');

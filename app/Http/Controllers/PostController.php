@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 use Auth;
 use App\Category;
+use App\Comment;
 use App\Post;
 use App\Like;
 use App\Dislike;
+
 class PostController extends Controller
 {
     /**
@@ -101,6 +103,25 @@ class PostController extends Controller
     }
 
     /**
+     * View comment page for post
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function comment(Request $request, $post_id)
+    {
+        $this->validate($request, [
+            'comment' => 'required'
+        ]);
+        $comment = new Comment;
+        $comment->user_id = Auth::user()->getId();
+        $comment->post_id = $post_id;
+        $comment->comment = $request->input('comment');
+        $comment->save();
+        return redirect('/view' . '/' . $post_id)
+        ->with('response', "Comment Posted!");
+    }
+
+    /**
      * View a full post.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -112,11 +133,19 @@ class PostController extends Controller
         $likeCounter = Like::where(['post_id' => $likePost->id])->count();
         $dislikeCounter = Dislike::where(['post_id' => $likePost->id])->count();
         $categories = Category::all();
+        $comments = DB::table('users')
+        ->join('comments', 'users.id', '=', 'comments.user_id')
+        ->join('posts', 'comments.post_id', '=', 'posts.id')
+        ->select('users.name', 'comments.*')
+        ->where(['posts.id' => $post_id])
+        ->get();
+
         return view('pages.posts.view', [
             'posts' => $posts,
             'categories' => $categories,
             'likeCounter' => $likeCounter,
-            'dislikeCounter' => $dislikeCounter
+            'dislikeCounter' => $dislikeCounter,
+            'comments' => $comments
         ]);
     }
 

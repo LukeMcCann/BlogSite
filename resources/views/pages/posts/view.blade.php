@@ -14,6 +14,11 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if(session('response'))
+                <div class="alert alert-success">
+                    {{session('response')}}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header text-center bg-dark text-white">{{ __('View') }}</div>
 
@@ -49,6 +54,36 @@
                             Post Unavailable!
                         </p>
                   @endif
+
+                  <form method="POST" action='{{ url("/comment/{$post->id}") }}'>
+                      {{csrf_field()}}
+                      <div class="form-group">
+                          <textarea id="comment" rows="6" class="form-control" name="comment" required autofocus="">
+
+                          </textarea>
+                      </div>
+                      <div class="form-group">
+                          <button type="submit" class="btn btn-dark btn-lg btn-block">
+                              Post
+                          </button>
+                      </div>
+                  </form>
+                  <h2>Comments</h2>
+                  @if(count($comments) > 0)
+                      @foreach($comments->all() as $comment)
+                          <p>
+                              {{$comment->comment}}
+                          </p>
+                          <p>
+                              Posted by: {{$comment->name}}
+                          </p>
+                          <hr />
+                      @endforeach
+                  @else
+                      <p>
+                          No Comments.
+                      </p>
+                  @endif
                 </div>
 
                 <div class="card-body col-md-20">
@@ -64,7 +99,6 @@
                                 Category does not exist.
                             </p>
                         @endif
-
                     </ul>
                 </div>
             </div>
