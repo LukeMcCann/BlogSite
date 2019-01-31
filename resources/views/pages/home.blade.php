@@ -105,12 +105,14 @@
                                                 {{-- <a style="color: blue;" role="button" class=" btn btn-light fa fa-eye"> view</a> --}}
                                                 <a href='{{ url("/view/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fa fa-eye"> view</a>
                                         </li>
-                                        <li role="presentation">
-                                                <a href='{{ url("/edit/{$post->id}") }}'style="color: white;" role="button" class=" btn btn-dark fas fa-edit"> edit</a>
-                                        </li>
-                                        <li role="presentation">
-                                                <a href='{{ url("/delete/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fas fa-trash-alt"> delete</a>
-                                        </li>
+                                        @if(Auth::id() == 1)
+                                            <li role="presentation">
+                                                    <a href='{{ url("/edit/{$post->id}") }}'style="color: white;" role="button" class=" btn btn-dark fas fa-edit"> edit</a>
+                                            </li>
+                                            <li role="presentation">
+                                                    <a href='{{ url("/delete/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fas fa-trash-alt"> delete</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                     <cite style="float: left;">Posted on: {{date('M d, Y H:m', strtotime($post->created_at))}}</cite>
                                     <br />
