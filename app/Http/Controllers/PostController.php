@@ -77,4 +77,36 @@ class PostController extends Controller
 
         return redirect('/home')->with('response', 'Post Published!');
     }
+
+    /**
+     * View a full post.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function view($post_id)
+    {
+        $posts = Post::where('id', '=', $post_id)->get();
+        $categories = Category::all();
+        return view('pages.posts.view', ['posts' => $posts, 'categories' => $categories]);
+    }
+
+    /**
+     * Edit a post.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function edit($id)
+    {
+        return $id;
+    }
+
+    /**
+     * Edit a post.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function delete($id)
+    {
+        return $id;
+    }
 }

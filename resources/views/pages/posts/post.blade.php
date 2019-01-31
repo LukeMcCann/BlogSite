@@ -4,9 +4,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">New Post</div>
+                    <div class="card-header text-center bg-dark text-white">New Post</div>
 
-                    <div class="card-body">
+                    <div class="card-body text-center bg-dark text-white">
                         <form method="POST" action="{{ url('/newPost') }}" enctype="multipart/form-data">
                             @csrf
 
@@ -79,7 +79,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-block btn-primary btn-lg">
+                                    <button type="submit" class="btn btn-block btn-light btn-lg">
                                         {{ __('Publish') }}
                                     </button>
                                 </div>

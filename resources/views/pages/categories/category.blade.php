@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Catergories</div>
+                <div class="card-header text-center bg-dark text-white">Catergories</div>
 
-                <div class="card-body">
+                <div class="card-body bg-dark text-white">
                     <form method="POST" action="{{ url('/newCategory') }}">
                         @csrf
 
@@ -27,7 +27,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-5 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-light">
                                     {{ __('Add') }}
                                 </button>
                             </div>

@@ -23,5 +23,8 @@ Route::get('/category', 'PostController@category')->name('category');
 Route::post('/newCategory', 'CategoryController@newCategory');
 Route::post('/newProfile', 'ProfileController@newProfile');
 Route::post('/newPost', 'PostController@newPost');
+Route::get('/view/{id}', 'PostController@view');
+Route::get('/edit/{id}', 'PostController@edit');
+Route::get('/delete/{id}', 'PostController@delete');
 
 Auth::routes();
