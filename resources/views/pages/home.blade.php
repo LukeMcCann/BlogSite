@@ -103,6 +103,8 @@
                                     You have no posts!
                                 </p>
                           @endif
+
+                          {{$posts->links()}}
                         </div>
                     </div>
                 </div>

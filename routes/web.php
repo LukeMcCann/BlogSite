@@ -15,6 +15,7 @@
 //     return view('pages.index');
 // });
 
+Route::get('/category/{id}', 'PostController@categoryChange');
 Route::get('/index', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/profile', 'ProfileController@profile')->name('profile');

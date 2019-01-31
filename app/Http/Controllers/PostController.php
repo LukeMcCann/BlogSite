@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\DB;
 
 use Auth;
 use App\Category;
@@ -31,6 +32,26 @@ class PostController extends Controller
     public function category()
     {
         return view('pages.categories.category');
+    }
+
+    /**
+     * Show posts of specific category.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function categoryChange($category_id)
+    {
+        $categories = Category::all();
+        $posts = DB::table('posts')
+        ->join('categories', 'posts.category_id', '=', 'categories.id')
+        ->select('posts.*', 'categories.*')
+        ->where(['categories.id' => $category_id])
+        ->get();
+
+        return view('pages.categories.categoryposts', [
+            'categories' => $categories,
+            'posts' => $posts
+        ]);
     }
 
     /**
