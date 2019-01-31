@@ -85,7 +85,7 @@
                                     <ul class="nav nav-pills">
                                         <li role="presentation">
                                                 {{-- <a style="color: blue;" role="button" class=" btn btn-light fa fa-eye"> view</a> --}}
-                                                <a href='{{ url("/view/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fa fa-eye">view</a>
+                                                <a href='{{ url("/view/{$post->id}") }}' style="color: white;" role="button" class="btn btn-dark fa fa-eye"> view</a>
                                         </li>
                                         <li role="presentation">
                                                 <a href='{{ url("/edit/{$post->id}") }}'style="color: white;" role="button" class=" btn btn-dark fas fa-edit"> edit</a>

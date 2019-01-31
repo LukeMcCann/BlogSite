@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Category;
 use App\Post;
+use App\Like;
 
 class PostController extends Controller
 {
@@ -107,6 +108,8 @@ class PostController extends Controller
     public function view($post_id)
     {
         $posts = Post::where('id', '=', $post_id)->get();
+        $likePost = Post::find($post_id);
+        $likeCounter = Like::where(['post_id' => $likePost->id])->get();
         $categories = Category::all();
         return view('pages.posts.view', ['posts' => $posts, 'categories' => $categories]);
     }
